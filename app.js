@@ -18,8 +18,8 @@ app.use(
 app.use(express.urlencoded({ extended: true }))
 
 // Middleware para servir arquivos estáticos
-app.use(express.static(path.join(__dirname, 'src')))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'src')))
 
 // Função de middleware para verificar autenticação
 function requireAuth(req, res, next) {
@@ -32,7 +32,7 @@ function requireAuth(req, res, next) {
 
 // Rota de Login - renderiza o formulário de login
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'src', 'views', 'login.html'))
+  res.sendFile(path.join(__dirname, 'views', 'login.html'))
 })
 
 // Rota para processar o Login
@@ -63,9 +63,9 @@ app.get('/logout', (req, res) => {
 
 // Rota para página inicial (proteção com autenticação)
 app.get('/', requireAuth, (req, res) => {
-  res.sendFile(path.join(__dirname, 'src', 'views', 'index.html'))
+  res.sendFile(path.join(__dirname, 'views', 'index.html'))
 })
 
 app.listen(port, () => {
-  console.log(`Servidor executando em http://localhost:${port}/`)
+  console.log(`Servidor executando em http://localhost:${port}/login`)
 })
